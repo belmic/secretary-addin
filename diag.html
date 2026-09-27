@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Secretary Diag</title>
+  <!-- Единственная внешняя зависимость — office.js (требование платформы Office Add-ins). -->
+  <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+  <style>
+    body { font: 13px/1.4 "Segoe UI", system-ui, sans-serif; margin: 0; padding: 12px; overflow-y: scroll; color: #1f2328; background: #fff; }
+    h1 { font-size: 15px; margin: 0 0 4px; }
+    p { margin: 4px 0 10px; color: #57606a; }
+    .row { margin: 8px 0; }
+    button { font: inherit; padding: 6px 10px; margin: 0 6px 6px 0; cursor: pointer; }
+    button.main { background: #0f6cbd; color: #fff; border: 1px solid #0f6cbd; border-radius: 4px; }
+    input { font: inherit; width: 100%; box-sizing: border-box; padding: 4px; }
+    textarea { width: 100%; box-sizing: border-box; height: 300px; font: 11px/1.3 Consolas, monospace; }
+    #summary { padding: 8px; background: #f6f8fa; border-radius: 4px; white-space: pre-wrap; }
+    #status { color: #0f6cbd; min-height: 1.4em; }
+  </style>
+</head>
+<body>
+  <h1>Secretary Diag</h1>
+  <p>Показывает версию Outlook и какие API доступны. Письма не читает и никуда ничего не отправляет —
+     кроме проверки связи (кнопка ниже, только сам факт соединения).</p>
+  <div id="summary">Загрузка office.js…</div>
+  <div class="row">
+    <button id="btn-item">Проверить открытое письмо</button>
+    <button id="btn-sel">Проверить выделение</button>
+  </div>
+  <div class="row">
+    <label>Проверка связи (необязательно): доп. адрес, например n8n
+      <input id="probe-url" placeholder="https://…"></label>
+    <button id="btn-net">Проверить связь</button>
+  </div>
+  <div class="row">
+    <button id="btn-copy" class="main">Скопировать отчёт</button>
+    <span id="status"></span>
+  </div>
+  <textarea id="out" readonly></textarea>
+  <script src="diag.js"></script>
+</body>
+</html>
