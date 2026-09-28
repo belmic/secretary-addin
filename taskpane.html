@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>В Secretary</title>
+  <!-- Единственная внешняя зависимость — office.js (требование платформы Office Add-ins). -->
+  <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+  <style>
+    :root { --fg: #1f2328; --muted: #57606a; --line: #d0d7de; --accent: #0f6cbd; --ok: #1a7f37; --err: #cf222e; }
+    body { font: 13px/1.4 "Segoe UI", system-ui, sans-serif; margin: 0; padding: 12px; overflow-y: scroll; color: var(--fg); background: #fff; }
+    h1 { font-size: 15px; margin: 0 0 8px; }
+    .row { margin: 8px 0; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    label { color: var(--muted); }
+    select, input { font: inherit; padding: 4px; }
+    input[type=text], input[type=password] { width: 100%; box-sizing: border-box; margin-bottom: 4px; }
+    button { font: inherit; padding: 6px 10px; cursor: pointer; border: 1px solid var(--line); background: #f6f8fa; border-radius: 4px; }
+    button.main { background: var(--accent); color: #fff; border-color: var(--accent); }
+    button:disabled { opacity: .5; cursor: default; }
+    ul { list-style: none; padding: 0; margin: 8px 0; border-top: 1px solid var(--line); }
+    li { padding: 6px 0; border-bottom: 1px solid var(--line); display: flex; gap: 8px; }
+    li .subj { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    li .st { white-space: nowrap; color: var(--muted); }
+    li .st.ok { color: var(--ok); } li .st.err { color: var(--err); }
+    .hint { color: var(--muted); font-size: 12px; }
+    .err { color: var(--err); }
+    #auth { padding: 8px; background: #f6f8fa; border-radius: 4px; }
+    details { margin-top: 16px; } summary { cursor: pointer; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <h1>В Secretary</h1>
+  <div id="unsupported" hidden class="err">Этот Outlook не поддерживает отправку (нужен новый Outlook для Windows или Outlook в браузере).</div>
+  <div id="app" hidden>
+    <div id="auth"></div>
+    <div class="row">
+      <label for="ws">Контур</label> <select id="ws"></select>
+      <label><input type="checkbox" id="sign"> На подпись</label>
+    </div>
+    <ul id="list"></ul>
+    <div class="hint" id="pin-hint">Закрепите панель (значок булавки), чтобы она не закрывалась при смене письма.</div>
+    <div class="row">
+      <button id="send" class="main" disabled>Отправить</button>
+      <span id="summary"></span>
+    </div>
+    <details>
+      <summary>Настройки</summary>
+      <p class="hint">Client ID и Client Secret — те же, что в расширении (вкладка «Хранилище»).
+        Хранятся только в этой панели на этом компьютере.</p>
+      <input type="text" id="client-id" placeholder="Client ID">
+      <input type="password" id="client-secret" placeholder="Client Secret">
+      <div class="row">
+        <button id="save-client">Сохранить</button>
+        <button id="logout">Выйти из Google</button>
+      </div>
+      <p class="hint">Версия <span id="ver"></span> · <a href="diag.html">диагностика</a></p>
+    </details>
+  </div>
+  <script nomodule>document.getElementById('unsupported').hidden = false;</script>
+  <script type="module" src="taskpane.js"></script>
+</body>
+</html>
