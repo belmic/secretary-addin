@@ -5,7 +5,7 @@ import { buildPackage } from './lib/package.js';
 import { uploadPackage, loadWorkspaces } from './lib/uploader.js';
 import { call, ensureMasterCategory, markSent } from './lib/office.js';
 
-const VERSION = '1.2.0';
+const VERSION = '1.3.0';
 const PAGES = new URL('./', location.href).href;
 const LS_WS = 'secretary-workspace';
 const LS_WS_LIST = 'secretary-workspaces';
@@ -158,7 +158,13 @@ async function send() {
     };
     try {
       set('читаю…');
-      const pkg = await buildPackage(Office.context.mailbox, sel, { workspace, intent, client, addinVersion: VERSION });
+      const pkg = await buildPackage(Office.context.mailbox, sel, {
+        workspace,
+        intent,
+        client,
+        addinVersion: VERSION,
+        userEmail: Office.context.mailbox.userProfile?.emailAddress,
+      });
       set('загрузка 0%');
       const r = await uploadPackage(drive, pkg, {
         workspace,
