@@ -5,7 +5,7 @@
   xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides/1.0"
   xsi:type="MailApp">
   <Id>3b4fc6bb-a2d5-4ff4-aae7-15975b09fd11</Id>
-  <Version>1.0.0.0</Version>
+  <Version>1.1.0.0</Version>
   <ProviderName>belmic</ProviderName>
   <DefaultLocale>ru-RU</DefaultLocale>
   <DisplayName DefaultValue="Secretary Diag"/>
