@@ -1,0 +1,10 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Secretary — вход</title>
+<p>Переход ко входу Google…</p>
+<script>
+  // Диалог Office должен открыть страницу своего домена; отсюда — сразу на Google (только туда).
+  const u = new URLSearchParams(location.search).get('u') || '';
+  if (u.startsWith('https://accounts.google.com/')) location.replace(u);
+  else document.body.textContent = 'Неверный адрес входа';
+</script>

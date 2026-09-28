@@ -40,8 +40,15 @@
   function verdict() {
     var mb = report.requirement_sets && report.requirement_sets.Mailbox;
     if (!mb) return 'office.js ещё не готов…';
+    // Только непрерывный ряд: Outlook 2016 сравнивает версии как числа («1.10» = 1.1)
+    // и отвечает true на 1.10+, не поддерживая 1.5.
     var max = '—';
-    for (var v in mb) if (mb[v] === true) max = v;
+    for (var i = 1; i <= 16; i++) {
+      if (mb['1.' + i] !== true) break;
+      max = '1.' + i;
+    }
+    var n = +max.split('.')[1] || 0;
+    mb = { '1.8': n >= 8, '1.15': n >= 15 };
     var lines = [
       'Клиент: ' + (report.mailbox && report.mailbox.hostName) + ' ' + (report.mailbox && report.mailbox.hostVersion),
       'Сервер: ' + (report.exchange && report.exchange.guess),

@@ -1,0 +1,14 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Secretary — вход</title>
+<script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+<p>Возврат в Outlook…</p>
+<script>
+  // Код авторизации — родительской панели (messageParent); обмен на токен — там.
+  Office.onReady(() => {
+    const q = new URLSearchParams(location.search);
+    Office.context.ui.messageParent(
+      JSON.stringify({ code: q.get('code'), state: q.get('state'), error: q.get('error') }),
+    );
+  });
+</script>
